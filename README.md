@@ -1,4 +1,4 @@
-# whatsapp_sticker_maker
+# WhatsApp Sticker Maker
 
 Python project that automates processing mass image files to produce stickers as per WhatsApp Guides
 
