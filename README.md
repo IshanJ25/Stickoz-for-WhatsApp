@@ -5,12 +5,13 @@ Python project that automates processing mass image files to produce stickers as
 
 # Result
 
+Output in png form
 ![slide_1](https://user-images.githubusercontent.com/86649457/147594726-66c99a45-fbe4-48e6-865a-d321d8283bc3.jpg)
 
 
 # How to use
 
-place the whatsapp_sticker_maker.py file beside your own python file
+place the `whatsapp_sticker_maker.py` file beside your own python file
 uses these commands:
 
 ```Python
