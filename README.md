@@ -8,7 +8,7 @@ Python project that automates processing mass image files to produce stickers as
 
 Function to automate processing mass image files to produce stickers as per WhatsApp Guides.
 8 px thick white border around the image fit in 512x512 square with 16 px distance from edge.
-Only supports png, jpg and jpeg files. Makes png files in specified output folder.
+Only supports `png`, `jpg` & `jpeg` files. Makes `png` files in specified output folder.
 
 
 # Result ✨
@@ -45,4 +45,4 @@ Argument | What is does | Value type
 --- | --- | ---
 folder |  Folder location where all images are present. |  string
 output_folder | Export folder. New folder is made if already not exists. |  string
-empty_if_contents | If exports folder already has files, then delete them. Default is False. |  boolean
+empty_if_contents | If exports folder already has files, then delete them. Default is False. Use with caution ⚠️ |  boolean
