@@ -105,8 +105,13 @@ def make_stickers(folder: str = None, output_folder: str = None, empty_if_conten
     error_img = []
 
     for file in glob(f'{folder}/*.png') + glob(f'{folder}/*.jpg') + glob(f'{folder}/*.jpeg'):
-        im = Image.open(file)
-        im_name = str(im.filename[len(folder) + 1:])
+
+        try:
+            im = Image.open(file)
+            im_name = str(im.filename[len(folder) + 1:])
+        except:
+            error_img.append(str(file[len(folder) + 1:]))
+            continue
 
         im = im.convert('RGBA')
 
