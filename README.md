@@ -2,6 +2,12 @@
 
 Python project that automates processing mass image files to produce stickers as per WhatsApp Guides
 
+## `make_stickers` function:
+
+Function to automate processing mass image files to produce stickers as per WhatsApp Guides.
+8 px thick white border around the image fit in 512x512 square with 16 px distance from edge.
+Only supports png, jpg and jpeg files. Makes png files in specified output folder.
+
 
 # Result
 
@@ -20,7 +26,7 @@ from whatsapp_sticker_maker import make_stickers
 # Requirements: you must have these libraries installed with your python package
 # os, pathlib, glob, numpy, PIL, cv2
 
-make_stickers(folder='folder\path', output_folder='export_folder\path', file_type='png', empty_if_contents=True)
+make_stickers(folder='folder/path', output_folder='export_folder_path', empty_if_contents=True)
 ```
 
 Prameters:
@@ -29,5 +35,4 @@ Argument | What is does | Value type
 --- | --- | ---
 folder |  Folder location where all images are present. |  string
 output_folder | Export folder. New folder is made if already not exists. |  string
-file_type | 'jpg' or 'png'. Default is 'png'. Currently, only 'png' and 'jpg' are supported. | string
 empty_if_contents | If exports folder already has files, then delete them. Default is False. |  boolean
