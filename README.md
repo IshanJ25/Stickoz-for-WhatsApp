@@ -17,8 +17,7 @@ Output in png form
 
 # How to use
 
-place the `whatsapp_sticker_maker.py` file beside your own python file
-uses these commands:
+place the `whatsapp_sticker_maker.py` file beside your own python file and use these commands:
 
 ```Python
 from whatsapp_sticker_maker import make_stickers
