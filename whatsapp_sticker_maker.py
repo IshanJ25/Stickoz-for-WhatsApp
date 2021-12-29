@@ -20,23 +20,36 @@ threshold = 20
 white = (255, 255, 255)
 
 total_gap = side_gap + stroke_size
+
+
 #########################################
 
 
-def make_stickers(folder: str, output_folder: str, file_type='png', empty_if_contents=False):
-
+def make_stickers(folder: str = None, output_folder: str = None, empty_if_contents=False):
     """
     Function to automate processing mass image files to produce stickers as per WhatsApp Guides.
+
     8 px thick white border around the image fit in 512x512 square with 16 px distance from edge.
+
+    Only supports png, jpg and jpeg files.
     :param folder: Folder location where all images are present.
     :param output_folder: Export folder. New folder is made if already not exists.
-    :param empty_if_contents: If exports folder already has files, then delete them. Default is False
-    :param file_type: 'jpg' or 'png'. Default is 'png'. Currently, only 'png' and 'jpg' are supported.
+    :param empty_if_contents: If exports folder already has files, then delete them. Default is False..
 
     :return: None. Makes png files in specified output folder.
     """
 
     #########################################
+
+    if folder is None and output_folder is None:
+        print('Error: Please provide "folder" and "output_folder" parameters')
+        return
+    elif folder is None:
+        print('Error: Please provide "folder" parameter')
+        return
+    elif output_folder is None:
+        print('Error: Please provide "output_folder" parameter')
+        return
 
     def stroke(origin_image, threshold, stroke_size: int, color):
 
@@ -89,15 +102,13 @@ def make_stickers(folder: str, output_folder: str, file_type='png', empty_if_con
             remove(file)
 
     image_count = 0
+    error_img = []
 
-    if file_type != 'jpg':
-        file_type = 'png'
-
-    for file in glob(f'{folder}/*.{file_type}'):
-
+    for file in glob(f'{folder}/*.png') + glob(f'{folder}/*.jpg') + glob(f'{folder}/*.jpeg'):
         im = Image.open(file)
-        im_name = im.filename[len(folder)+1:]
-        image_count += 1
+        im_name = str(im.filename[len(folder) + 1:])
+
+        im = im.convert('RGBA')
 
         im_w, im_h = im.size
 
@@ -118,10 +129,28 @@ def make_stickers(folder: str, output_folder: str, file_type='png', empty_if_con
             y = side_gap
 
         im = im.resize((new_w, new_h))
-        im = stroke(im, threshold=threshold, stroke_size=stroke_size, color=white)
+        try:
+            im = stroke(im, threshold=threshold, stroke_size=stroke_size, color=white)
+        except:
+            error_img.append(im_name)
+            continue
         image = Image.new('RGBA', (square_side, square_side))
         image.paste(im, (x, y), im)
 
-        image.save(f"{output_folder}/{im_name}", "PNG")
+        im_name = im_name.split('.')[0]
+        image.save(f"{output_folder}/{im_name}.png", "PNG")
+        image_count += 1
+        print(f"{output_folder}/{im_name}.png ... Done!")
 
-    print(f'{image_count} images were processed.')
+    if image_count == 0:
+        print('\nNo images were found in provided folder')
+    else:
+        print(f'\n{image_count} images were processed.')
+
+    if error_img:
+        if len(error_img) == 1:
+            print(f'\nError processing 1 image: {error_img[0]}')
+        else:
+            print(f'\nError processing {len(error_img)} images:')
+            for i in error_img:
+                print(i)
