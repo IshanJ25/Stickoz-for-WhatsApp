@@ -1,22 +1,35 @@
-# WhatsApp Sticker Maker
+# WhatsApp Sticker Maker 🦩
+
+<span class="material-icons-round">
+collections
+</span>
 
 Python project that automates processing mass image files to produce stickers as per WhatsApp Guides
 
-## `make_stickers` function:
+## `make_stickers()` function:
 
 Function to automate processing mass image files to produce stickers as per WhatsApp Guides.
 8 px thick white border around the image fit in 512x512 square with 16 px distance from edge.
 Only supports png, jpg and jpeg files. Makes png files in specified output folder.
 
 
-# Result
+# Result ✨
 
 Output in png form
 ![slide_1](https://user-images.githubusercontent.com/86649457/147594726-66c99a45-fbe4-48e6-865a-d321d8283bc3.jpg)
 
 
-# How to use
+# How to use ℹ️
 
+## Requirements
+
+you must have these libraries installed with your python package:
+
+`os, pathlib, glob, numpy, PIL, cv2`
+
+This program has only been tested on **`Windows 10 & 11`** with **`Python 3.10`**
+
+## Usage
 place the `whatsapp_sticker_maker.py` file beside your own python file and use these commands:
 
 ```Python
