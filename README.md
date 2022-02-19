@@ -8,13 +8,15 @@ Python project that automates processing mass image files to produce stickers as
 
 Function to automate processing mass image files to produce stickers as per WhatsApp Guides.
 8 px thick white border around the image fit in 512x512 square with 16 px distance from edge.
-Only supports `png`, `jpg` & `jpeg` files. Makes `png` files in specified output folder.
+
+Currently supports reading `png`, `jpg`, `jpeg` and `gif` formats.
+Able to write images in `png`, `gif` and `webp` formats.
 
 
 # Result ✨
 
 Output in png form
-![slide_1](https://user-images.githubusercontent.com/86649457/147594726-66c99a45-fbe4-48e6-865a-d321d8283bc3.jpg)
+![presentation_image](https://user-images.githubusercontent.com/86649457/147594726-66c99a45-fbe4-48e6-865a-d321d8283bc3.jpg)
 
 
 # How to use ℹ️
@@ -31,18 +33,20 @@ This program has only been tested on **`Windows 10 & 11`** with **`Python 3.10`*
 place the `whatsapp_sticker_maker.py` file beside your own python file and use these commands:
 
 ```Python
-from whatsapp_sticker_maker import make_stickers
+import whatsapp_sticker_maker
 
 # Requirements: you must have these libraries installed with your python package
 # os, pathlib, glob, numpy, PIL, cv2
 
-make_stickers(folder='folder/path', output_folder='export_folder_path', empty_if_contents=True)
+whatsapp_sticker_maker.make_stickers(folder='doge', output_folder='exports', empty_if_contents=True, animated=False)
 ```
 
 Prameters:
 
 Argument | What is does | Value type
 --- | --- | ---
-folder |  Folder location where all images are present. |  string
+folder | Folder location where all images are present. |  string
 output_folder | Export folder. New folder is made if already not exists. |  string
-empty_if_contents | If exports folder already has files, then delete them. Default is False. Use with caution ⚠️ |  boolean
+animated | Is the image animated? Default is False | boolean
+empty_if_contents | Empty exports' folder if already contains files. Default is False. Use with caution ⚠️ | boolean
+save_as_webp | Export as webp instead of native format. Default is False. | boolean
