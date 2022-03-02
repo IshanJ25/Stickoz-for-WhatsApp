@@ -43,10 +43,10 @@ whatsapp_sticker_maker.make_stickers(folder='doge', output_folder='exports', emp
 
 Prameters:
 
-Argument | What is does | Value type
---- | --- | ---
-folder | Folder location where all images are present. |  string
-output_folder | Export folder. New folder is made if already not exists. |  string
-animated | Is the image animated? Default is False | boolean
-empty_if_contents | Empty exports' folder if already contains files. Default is False. Use with caution ⚠️ | boolean
-save_as_webp | Export as webp instead of native format. Default is False. | boolean
+Argument | What is does | Value type | Default value
+--- | --- | --- | ---
+folder | Folder location where all images are present. | `String` | `None`
+output_folder | Export folder. New folder is made if already not exists. | `String` | `None`
+animated | Is the image animated? | `Boolean` | `False`
+empty_if_contents | Empty exports' folder if already contains files. Use with caution ⚠️ | `Boolean` | `False`
+save_as_webp | Export as webp instead of native format. | `Boolean` | `False`
