@@ -1,3 +1,13 @@
+### Table of Contents
+- [WhatsApp Sticker Maker](#whatsapp-sticker-maker-)
+  -  [`make_stickers()`](#make_stickers-function)
+- [Result](#result-)
+- [How to use](#how-to-use-ℹ%EF%B8%8F)
+  - [Requirements](#requirements)
+  - [Usage](#usage)
+  - [Prameters](#prameters)
+
+
 # WhatsApp Sticker Maker 🦩
 
 
@@ -41,7 +51,7 @@ import whatsapp_sticker_maker
 whatsapp_sticker_maker.make_stickers(folder='doge', output_folder='exports', empty_if_contents=True, animated=False)
 ```
 
-Prameters:
+## Prameters:
 
 Argument | What is does | Value type | Default value
 --- | --- | --- | ---
