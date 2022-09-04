@@ -5,7 +5,7 @@
 - [How to use](#how-to-use-ℹ%EF%B8%8F)
   - [Requirements](#requirements)
   - [Usage](#usage)
-  - [Prameters](#prameters)
+  - [Parameters](#prameters)
 
 
 # WhatsApp Sticker Maker 🦩
