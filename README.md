@@ -51,7 +51,7 @@ import whatsapp_sticker_maker
 whatsapp_sticker_maker.make_stickers(folder='doge', output_folder='exports', empty_if_contents=True, animated=False)
 ```
 
-## Prameters:
+## Parameters:
 
 Argument | What is does | Value type | Default value
 --- | --- | --- | ---
