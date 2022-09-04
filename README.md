@@ -5,7 +5,7 @@
 - [How to use](#how-to-use-ℹ%EF%B8%8F)
   - [Requirements](#requirements)
   - [Usage](#usage)
-  - [Prameters](#prameters)
+  - [Parameters](#prameters)
 
 
 # WhatsApp Sticker Maker 🦩
@@ -51,7 +51,7 @@ import whatsapp_sticker_maker
 whatsapp_sticker_maker.make_stickers(folder='doge', output_folder='exports', empty_if_contents=True, animated=False)
 ```
 
-## Prameters:
+## Parameters:
 
 Argument | What is does | Value type | Default value
 --- | --- | --- | ---
