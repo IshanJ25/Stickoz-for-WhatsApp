@@ -11,7 +11,7 @@
 # WhatsApp Sticker Maker 🦩
 
 
-Python project that automates processing mass image files to produce stickers as per [WhatsApp Guidelines](https://faq.whatsapp.com/general/how-to-create-stickers-for-whatsapp/)
+Python project that automates processing mass image files to produce stickers as per [WhatsApp Guidelines](https://faq.whatsapp.com/219571822467807/)
 
 
 ## `make_stickers()` function:
