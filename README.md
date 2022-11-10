@@ -57,6 +57,6 @@ Argument | What is does | Value type | Default value
 --- | --- | --- | ---
 folder | Folder location where all images are present. | `String` | `None`
 output_folder | Export folder. New folder is made if already not exists. | `String` | `None`
-animated | Is the image animated? | `Boolean` | `False`
-empty_if_contents | Empty exports' folder if already contains files. Use with caution ⚠️ | `Boolean` | `False`
+animated | Are the images animated? (GIF Support!!!)| `Boolean` | `False`
+empty_if_contents | Empty exports' folder if already contains files.<Br>Use with caution ⚠️ | `Boolean` | `False`
 save_as_webp | Export as webp instead of native format. | `Boolean` | `False`
