@@ -1,3 +1,5 @@
+![WA_sticker_formatting](https://socialify.git.ci/IshanJ25/WA_sticker_formatting/image?description=1&descriptionEditable=Python%20project%20that%20automates%20processing%20mass%20image%20files%20to%20produce%20stickers%20as%20per%20WhatsApp%20Guidelines&font=Inter&name=1&owner=1&pattern=Charlie%20Brown&theme=Auto)
+
 ### Table of Contents
 - [WhatsApp Sticker Maker](#whatsapp-sticker-maker-)
   -  [`make_stickers()`](#make_stickers-function)
