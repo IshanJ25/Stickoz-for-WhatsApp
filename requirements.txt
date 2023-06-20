@@ -1,7 +1,3 @@
-numpy>=1.22.2
-opencv_python>=4.5.5.62
-Pillow>=9.0.1
-flake8
-codecov
-pytest
-pytest-cov
+numpy
+opencv_python
+Pillow
