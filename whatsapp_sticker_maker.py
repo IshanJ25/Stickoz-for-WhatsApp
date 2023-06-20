@@ -4,17 +4,16 @@ from pathlib import Path
 
 import cv2
 import numpy as np
-from PIL import Image, ImageSequence
+from PIL import Image, ImageSequence, ImageFilter
 
 """
 Program made by Ishan Jindal
-Github: https://github.com/IshanJ25/whatsapp_sticker_maker
+GitHub: https://github.com/IshanJ25/Stickoz-for-WhatsApp
 """
 
 #########################################
 
-img_types = ['png', 'jpg', 'jpeg']  # image types to be converted
-gif_types = ['gif']  # gif types to be converted
+img_types = ['png', 'jpg', 'jpeg', 'gif']
 
 #########################################
 
@@ -23,6 +22,8 @@ square_side = 512
 side_gap = 16
 stroke_size = 8
 threshold = 20
+
+aa_strength = 1.2
 
 white = (255, 255, 255)
 
@@ -34,35 +35,44 @@ gif_loop_count = 0
 #########################################
 
 
-def make_stickers(folder: str = None, output_folder: str = None, animated: bool = False,
-                  empty_if_contents=False, save_as_webp=False):
+def make_stickers(folder: str = None,
+                  output_folder: str = None,
+                  # animated: bool = False,
+                  # empty_if_contents=False,
+                  native_format_output=False):
     """
     Function to automate processing mass image files to produce stickers as per WhatsApp Guides.
     8 px thick white border around the image fit in 512x512 square with 16 px distance from edge.
 
     Supports png, jpg, jpeg and gif formats.
 
-    :param save_as_webp: Export as webp instead of native format. Default is False.
-    :param animated: Is the image animated? Default is False.
+    :param native_format_output: Export in native format instead of webp format. Default is False.
+    # :param animated: Is the image animated? Default is False.
     :param folder: Folder location where all images are present.
-    :param output_folder: Export folder. New folder is made if already not exists.
-    :param empty_if_contents: Empty exports' folder if already contains files. Default is False.
+    :param output_folder: Export folder. New folder is made if already not exists. if not provided,
+    'sticker_export' is used.
+    # :param empty_if_contents: Empty exports' folder if already contains files. Default is False.
 
     :return: None. Makes specified type files in specified output folder.
     """
 
     #########################################
 
-    if folder is None and output_folder is None:
-        print('Error: Please provide "folder" and "output_folder" parameters')
-        return
-    elif folder is None:
+    if folder is None:
         print('Error: Please provide "folder" parameter')
         return
-    elif output_folder is None:
-        print('Error: Please provide "output_folder" parameter')
-        return
 
+    if output_folder is None:
+        output_folder = 'sticker_export'
+
+    Path(f'{output_folder}').mkdir(parents=True, exist_ok=True)
+
+    for file in glob(f'{output_folder}/*'):
+        remove(file)
+
+    #########################################
+
+    # noinspection PyUnresolvedReferences
     def stroke(origin_image, threshold, stroke_size: int, color):
 
         def change_matrix(input_mat, stroke_size):
@@ -101,7 +111,8 @@ def make_stickers(folder: str = None, output_folder: str = None, animated: bool 
         stroke_r = np.full((h, w), color[0], np.uint8)
 
         stroke = cv2.merge((stroke_b, stroke_g, stroke_r, stroke_alpha))
-        stroke = cv2pil(stroke)
+        stroke = cv2pil(stroke).filter(ImageFilter.GaussianBlur(aa_strength))
+
         bigger_img = cv2pil(bigger_img)
         result = Image.alpha_composite(stroke, bigger_img)
         return result
@@ -141,30 +152,22 @@ def make_stickers(folder: str = None, output_folder: str = None, animated: bool 
 
     #########################################
 
-    Path(f'{output_folder}').mkdir(parents=True, exist_ok=True)
-
-    if empty_if_contents:
-        for file in glob(f'{output_folder}/*'):
-            remove(file)
-
     image_count = 0
     error_img = []
 
-    if not animated:
+    file_list = []
 
-        file_list = []
+    for i in img_types:
+        file_list += glob(f'{folder}/*{i}')
 
-        for i in img_types:
-            file_list += glob(f'{folder}/*{i}')
+    for file in file_list:
 
-        input_type = 'picture'
+        if file.split('.')[-1] != 'gif':
 
-        if save_as_webp:
-            output_extension = 'webp'
-        else:
-            output_extension = 'png'
-
-        for file in file_list:
+            if native_format_output:
+                output_extension = 'png'
+            else:
+                output_extension = 'webp'
 
             try:
                 im = Image.open(file)
@@ -194,22 +197,12 @@ def make_stickers(folder: str = None, output_folder: str = None, animated: bool 
             image_count += 1
             print("Done!")
 
+        elif file.split('.')[-1] == 'gif':
 
-    elif animated:
-
-        file_list = []
-
-        for i in gif_types:
-            file_list += glob(f'{folder}/*{i}')
-
-        input_type = 'gif'
-
-        if save_as_webp:
-            output_extension = 'webp'
-        else:
-            output_extension = 'gif'
-
-        for file in file_list:
+            if native_format_output:
+                output_extension = 'gif'
+            else:
+                output_extension = 'webp'
 
             try:
                 im = Image.open(file)
@@ -251,20 +244,15 @@ def make_stickers(folder: str = None, output_folder: str = None, animated: bool 
             print("Done!")
 
     if image_count == 0:
-        print(f'\nNo {input_type}s were found in provided folder\n')
-    elif image_count == 1:
-        print(f'\n1 {input_type} was converted\n')
+        print(f'\nNo images were found in provided folder\n')
     else:
-        print(f'\n{image_count} {input_type}s were processed.\n')
+        print(f'\n{image_count} image(s) were processed.\n')
 
     if error_img:
-        if len(error_img) == 1:
-            print(f'\nError processing 1 {input_type}: {error_img[0]}\n')
-        else:
-            print(f'\nError processing {len(error_img)} {input_type}s:')
-            for i in error_img:
-                print(i)
-            print('\n')
+        print(f'\nError processing {len(error_img)} image(s):')
+        for i in error_img:
+            print(i)
+        print('\n')
 
 
 def give_code_format(folder: str = None, img_type: str = None):
