@@ -50,7 +50,7 @@ import whatsapp_sticker_maker
 # Requirements: you must have these libraries installed with your python package
 # os, pathlib, glob, numpy, PIL, cv2
 
-whatsapp_sticker_maker.make_stickers(folder='doge', output_folder='exports', native_format_output=False)
+whatsapp_sticker_maker.make_stickers(folder='doge', output_folder='exports', native_format_output=False, skip_if_exists=True)
 ```
 
 ## Parameters:
@@ -60,3 +60,5 @@ Argument | What is does | Value type | Default value | Required
 folder | Folder location where all images are present. | `String` | `None` | Yes
 output_folder | Export folder. New folder is made if already not exists and/or provided. | `String` | `None` | No
 native_format_output | Export in native formats instead of webp. | `Boolean` | `False` | No
+skip_if_exists | Skip exporting if expected output exists. | `Boolean` | `False` | No
+
