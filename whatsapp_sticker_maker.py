@@ -1,5 +1,6 @@
 from glob import glob
-from os import remove
+# from os import remove
+from os import path
 from pathlib import Path
 
 import cv2
@@ -39,13 +40,15 @@ def make_stickers(folder: str = None,
                   output_folder: str = None,
                   # animated: bool = False,
                   # empty_if_contents=False,
-                  native_format_output=False):
+                  native_format_output=False,
+                  skip_if_exists=False):
     """
     Function to automate processing mass image files to produce stickers as per WhatsApp Guides.
     8 px thick white border around the image fit in 512x512 square with 16 px distance from edge.
 
     Supports png, jpg, jpeg and gif formats.
 
+    :param skip_if_exists: Skip if output file already exists. Default is False.
     :param native_format_output: Export in native format instead of webp format. Default is False.
     # :param animated: Is the image animated? Default is False.
     :param folder: Folder location where all images are present.
@@ -67,8 +70,8 @@ def make_stickers(folder: str = None,
 
     Path(f'{output_folder}').mkdir(parents=True, exist_ok=True)
 
-    for file in glob(f'{output_folder}/*'):
-        remove(file)
+    # for file in glob(f'{output_folder}/*'):
+    #     remove(file)
 
     #########################################
 
@@ -172,6 +175,12 @@ def make_stickers(folder: str = None,
             try:
                 im = Image.open(file)
                 im_name = str(im.filename[len(folder) + 1:]).split('.')[0]
+
+                if skip_if_exists:
+                    if path.isfile(f"{output_folder}/{im_name}.{output_extension}"):
+                        # print(f"{output_folder}/{im_name}.{output_extension} exists")
+                        continue
+
                 print(f"{output_folder}/{im_name}.{output_extension} ... ", end='')
             except:
                 print("Error!")
@@ -207,6 +216,12 @@ def make_stickers(folder: str = None,
             try:
                 im = Image.open(file)
                 im_name = str(im.filename[len(folder) + 1:]).split('.')[0]
+
+                if skip_if_exists:
+                    if path.isfile(f"{output_folder}/{im_name}.{output_extension}"):
+                        # print(f"{output_folder}/{im_name}.{output_extension} exists")
+                        continue
+
                 print(f"{output_folder}/{im_name}.{output_extension} ... ", end='')
             except:
                 print("Error!")
@@ -238,7 +253,8 @@ def make_stickers(folder: str = None,
             imgs = im_list[1:]
 
             img.save(f"{output_folder}/{im_name}.{output_extension}", save_all=True, append_images=imgs,
-                     duration=duration, loop=gif_loop_count, optimize=False, disposal=2, lossless=True)
+                     duration=duration, loop=gif_loop_count, optimize=True, disposal=2, lossless=True,
+                     quality=25)
 
             image_count += 1
             print("Done!")
@@ -253,6 +269,8 @@ def make_stickers(folder: str = None,
         for i in error_img:
             print(i)
         print('\n')
+    
+    input('Press <enter> to continue...')
 
 
 def give_code_format(folder: str = None, img_type: str = None):
