@@ -13,7 +13,7 @@
 # WhatsApp Sticker Maker 🦩
 
 
-Python project that automates processing mass image files to produce stickers as per [WhatsApp Guidelines](https://faq.whatsapp.com/219571822467807/)
+Python project that automates processing mass image files to produce stickers as per [WhatsApp Guidelines](https://faq.whatsapp.com/1056840314992666/)
 
 
 ## `make_stickers()` function:
